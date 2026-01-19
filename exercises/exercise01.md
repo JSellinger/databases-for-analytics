@@ -27,17 +27,14 @@
 Why were these data types selected?
 
 ### Answer
-_Write your explanation here._
+I assume that these were chosen as they are both quantitiativve data but with different types. Population is an expected integer and LifeExpectancy is a decimal.
 
 ### Screenshot
-_Show the table structure or DESCRIBE output._
 
 ```sql
 DESCRIBE country;
 ```
-
-![Q1 Screenshot](screenshots/q1_datatypes.png)
-
+![Question 1 Screenshot](screenshots/Question%201.png)
 ---
 
 ## Question 2
@@ -46,7 +43,7 @@ DESCRIBE country;
 Why do you think this data type was selected?
 
 ### Answer
-_Write your explanation here._
+This was likely chosen because it is a smallint not an int. The difference is between how many bytes it uses. smallint is for whole integers that can fit within 2 bytes while int can store whole integers within 4 bytes.
 
 ### Screenshot
 
@@ -54,7 +51,7 @@ _Write your explanation here._
 DESCRIBE country;
 ```
 
-![Q2 Screenshot](screenshots/q2_indepyear.png)
+![Question 2 Screenshot (Same as 1)](screenshots/Question%201.png)
 
 ---
 
@@ -64,7 +61,9 @@ DESCRIBE country;
 Explain why your proposed data type might be better in some situations.
 
 ### Answer
-_Write your explanation here._
+Personally, I see no reason to switch from Smallint, maybe you could go up to int or down to tinyint but this assumes that for int we need years that long and for tinyint we can jsut abbreviate years. For example, "1997" as "97". Although, I would advise against both.
+
+The only thing I could potentially see is a char, but that would only be useful and really not that useful if we maybe had to incorporate AD or BC or maybe use them categorically but it is not as if we could not convert the ints to chars and then use them categorically in most instances. 
 
 ---
 
@@ -82,7 +81,7 @@ ORDER BY Name;
 
 ### Screenshot
 
-![Q4 Screenshot](screenshots/q4_cities_sorted.png)
+![Question 4 Screenshot](screenshots/Question%204.png)
 
 ---
 
@@ -100,7 +99,7 @@ ORDER BY GovernmentForm;
 
 ### Screenshot
 
-![Q5 Screenshot](screenshots/q5_government_forms.png)
+![Question 5 Screenshot](screenshots/Question%205.png)
 
 ---
 
@@ -118,7 +117,7 @@ WHERE Continent = 'Oceania';
 
 ### Screenshot
 
-![Q6 Screenshot](screenshots/q6_oceania.png)
+![Question 6 Screenshot](screenshots/Question%206.png)
 
 ---
 
@@ -135,7 +134,7 @@ FROM city;
 
 ### Screenshot
 
-![Q7 Screenshot](screenshots/q7_city_countrycode.png)
+![Question 7 Screenshot](screenshots/Question%207.png)
 
 ---
 
@@ -153,7 +152,7 @@ WHERE Name = 'Nashville-Davidson';
 
 ### Screenshot
 
-![Q8 Screenshot](screenshots/q8_update_city.png)
+![Question 8 Screenshot](screenshots/Question%208.png)
 
 ---
 
@@ -171,7 +170,7 @@ VALUES ('NAR', 'Narnia', 'Europe', 'Fantasy', 1000000);
 
 ### Screenshot
 
-![Q9 Screenshot](screenshots/q9_insert_narnia.png)
+![Q10 Screenshot - I named the screenshot wrong](screenshots/Question%2010.png)
 
 ---
 
@@ -188,4 +187,4 @@ WHERE Code = 'NAR';
 
 ### Screenshot
 
-![Q10 Screenshot](screenshots/q10_delete_narnia.png)
+![Q11 Screenshot](screenshots/Question%2011.png)
