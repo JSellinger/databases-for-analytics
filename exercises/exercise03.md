@@ -94,12 +94,12 @@ Using your `restaurants` collection in the `44661` database, write the MongoDB q
 ### MongoDB Query
 
 ```javascript
-// Your MongoDB query here
+db.restaurants.find({ "borough": "Queens", "cuisine": "Hamburgers" }).count()
 ```
 
 ### Screenshot
 
-![Q5 Screenshot](screenshots/q5_queens_hamburgers.png)
+![Q5 Screenshot](screenshots/exercise%203%20Q5.png)
 
 ---
 
@@ -112,12 +112,12 @@ Using your `restaurants` collection in the `44661` database, write the MongoDB q
 ### MongoDB Query
 
 ```javascript
-// Your MongoDB query here
+db.restaurants.find({ "address.zipcode": "10460" }).count()
 ```
 
 ### Screenshot
 
-![Q6 Screenshot](screenshots/q6_zipcode_count.png)
+![Q6 Screenshot](screenshots/exercise%203%20Q6.png)
 
 ---
 
@@ -141,12 +141,15 @@ Your output should resemble:
 ### MongoDB Query
 
 ```javascript
-// Your MongoDB query here
+db.restaurants.find(
+   { "address.zipcode": "10460" }, 
+   { "name": 1, "_id": 0 }
+)
 ```
 
 ### Screenshot
 
-![Q7 Screenshot](screenshots/q7_zipcode_names.png)
+![Q7 Screenshot](screenshots/exercise%203%20Q7.png)
 
 ---
 
@@ -161,9 +164,12 @@ Your results should include:
 ### MongoDB Query
 
 ```javascript
-// Your MongoDB query here
+db.restaurants.find(
+   { "name": { $regex: /IHOP/i } },
+   { "name": 1, "_id": 0 }
+)
 ```
 
 ### Screenshot
 
-![Q8 Screenshot](screenshots/q8_ihop_case_insensitive.png)
+![Q8 Screenshot](screenshots/exercise%203%20Q8.png)
