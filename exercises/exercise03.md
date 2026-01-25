@@ -24,16 +24,18 @@
 When importing the documents from `restaurants-json.json`, **how many documents were imported into your collection**?
 
 ### Answer
-_Write the number of documents imported._
+25,358 documents.
 
 ### Screenshot
-_Show evidence of how you determined this (for example, a count query)._
+The funny part is that you do not even need a command with MongoDB compass. It is at the top but I did insert the query below
 
 ```javascript
-// Your MongoDB command here
+db.restaurants.find().count()
 ```
 
-![Q1 Screenshot](screenshots/q1_document_count.png)
+![Q1 Screenshot](screenshots/exercise%203%20Q1.png)
+![Q1-1 Screenshot](screenshots/exercise%203%20Q1-1.png)
+
 
 ---
 
@@ -44,12 +46,12 @@ Before writing queries on the data, **what command do you use to set the MongoDB
 ### MongoDB Command
 
 ```javascript
-// Your MongoDB command here
+use 4461
 ```
 
 ### Screenshot
 
-![Q2 Screenshot](screenshots/q2_use_database.png)
+![Q2 Screenshot](screenshots/exercise%203%20Q2.png)
 
 ---
 
@@ -60,12 +62,12 @@ Using your `restaurants` collection in the `44661` database, write the MongoDB q
 ### MongoDB Query
 
 ```javascript
-// Your MongoDB query here
+db.restaurants.find({ "borough": "Queens" })
 ```
 
 ### Screenshot
 
-![Q3 Screenshot](screenshots/q3_queens_restaurants.png)
+![Q3 Screenshot](screenshots/exercise%203%20Q3.png)
 
 ---
 
@@ -76,12 +78,12 @@ Using your `restaurants` collection in the `44661` database, write the MongoDB q
 ### MongoDB Query
 
 ```javascript
-// Your MongoDB query here
+db.restaurants.find({ "borough": "Queens" }).count()
 ```
 
 ### Screenshot
 
-![Q4 Screenshot](screenshots/q4_queens_count.png)
+![Q4 Screenshot](screenshots/exercise%203%20Q4.png)
 
 ---
 
