@@ -172,7 +172,7 @@ VALUES ('NAR', 'Narnia', 'Europe', 'Fantasy', 1000000);
 
 ![Q10 Screenshot - I named the screenshot wrong](screenshots/Question%2010.png)
 
----
+---https://nwmissouri.instructure.com/courses
 
 ## Question 10
 
