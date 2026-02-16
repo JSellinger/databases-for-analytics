@@ -42,12 +42,15 @@ year
 ### SQL
 
 ```sql
--- Your SQL here
+SELECT distinct
+	EXTRACT(year FROM sent_date) AS Year
+FROM emails
+ORDER By Year ASC;
 ```
 
 ### Screenshot
 
-![Q1 Screenshot](screenshots/q1_email_years.png)
+![Q1 Screenshot](screenshots/exercise%205%20Q1.png)
 
 ---
 
@@ -65,12 +68,16 @@ count   year
 ### SQL
 
 ```sql
--- Your SQL here
+SELECT
+	Count(email_id), EXTRACT(year FROM sent_date) AS year
+From emails
+GROUP BY sent_date
+ORDER BY year ASC;
 ```
 
 ### Screenshot
 
-![Q2 Screenshot](screenshots/q2_message_count_by_year.png)
+![Q2 Screenshot](screenshots/exercise%205%20Q2.png)
 
 ---
 
@@ -86,12 +93,18 @@ Only include emails that contain **both** a sent date and an opened date.
 ### SQL
 
 ```sql
--- Your SQL here
+SELECT
+	sent_date, opened_date, opened_date - sent_date AS Interval
+From emails
+WHERE
+	sent_date IS NOT null
+	and
+	opened_date IS NOT null
 ```
 
 ### Screenshot
 
-![Q3 Screenshot](screenshots/q3_sent_opened_interval.png)
+![Q3 Screenshot](screenshots/exercise%205%20Q3.png)
 
 ---
 
@@ -102,12 +115,14 @@ Using the `sqlda` database, write the SQL needed to show emails that contain an 
 ### SQL
 
 ```sql
--- Your SQL here
+SELECT *
+FROM emails
+WHERE opened_date < sent_date
 ```
 
 ### Screenshot
 
-![Q4 Screenshot](screenshots/q4_opened_before_sent.png)
+![Q4 Screenshot](screenshots/exercise%205%20Q4.png)
 
 ---
 
@@ -119,11 +134,11 @@ After looking at the data, **why is this the case?**
 
 ### Answer
 
-_Write your explanation here._
+The immediate thing I noticed was that the columns specify "without time zone", therefore we can assume that the data is likely being pulled directly from the local computer and just taking the raw time stamp without any timezone data. They are eamiling people in the past time zones or in other words we are using Earth's mass and roundness to our advantage!!
 
 ### Screenshot (if requested by instructor)
 
-![Q5 Screenshot](screenshots/q5_explain_date_issue.png)
+![Q5 Screenshot](screenshots/exercise%205%20Q5.png)
 
 ---
 
@@ -160,9 +175,14 @@ CREATE TEMP TABLE customer_dealership_distance AS (
 
 ### Answer
 
-_Write your explanation here._
+While this raw SQL does not work because there is no customer points or dealership points in the database. It is creating two temp tables with the location data from the customers and from the dealerships and cross joining them into another temp table that has the customers distance from the dealerships. It is doing all of them, likely to be sorted later.
 
 ---
+
+### Screenshot (if requested by instructor)
+
+![Q6 Screenshot](screenshots/exercise%205%20Q6.png)
+
 
 ## Question 7
 
@@ -175,14 +195,18 @@ For example - dealership 1 is below:
 ```
 
 ### SQL
-
+Yeah, Gemini wrote this one for me ain't no I know what an array_agg does
 ```sql
--- Your SQL here
+SELECT DISTINCT
+    dealership_id, 
+    ARRAY_AGG(last_name || ', ' || first_name) OVER(PARTITION BY dealership_id) AS staff_list
+FROM salespeople
+ORDER BY dealership_id ASC;
 ```
 
 ### Screenshot
 
-![Q7 Screenshot](screenshots/q7_salespeople_array_by_dealership.png)
+![Q7 Screenshot](screenshots/exercise%205%20Q7.png)
 
 ---
 
@@ -202,12 +226,19 @@ Reference image:
 ### SQL
 
 ```sql
--- Your SQL here
+SELECT d.dealership_id, d.state,
+	ARRAY_AGG(s.last_name || ', ' || s.first_name) AS list_of_salespeople,
+	COUNT(s.salesperson_id) AS Num_of_salespeople
+FROM salespeople s
+LEFT JOIN dealerships d
+	ON d.dealership_id = s.dealership_id
+GROUP BY d.dealership_id, d.state
+ORDER BY d.state ASC;
 ```
 
 ### Screenshot
 
-![Q8 Screenshot](screenshots/q8_salespeople_array_state_count.png)
+![Q8 Screenshot](screenshots/exercise%205%20Q8.png)
 
 ---
 
@@ -218,12 +249,13 @@ Using the `sqlda` database, write the SQL needed to convert the **customers** ta
 ### SQL
 
 ```sql
--- Your SQL here
+SELECT row_to_json(c, TRUE)
+FROM customers c
 ```
 
 ### Screenshot
 
-![Q9 Screenshot](screenshots/q9_customers_to_json.png)
+![Q9 Screenshot](screenshots/exercise%205%20Q9.png)
 
 ---
 
@@ -244,9 +276,19 @@ Reference image:
 ### SQL
 
 ```sql
--- Your SQL here
+SELECT row_to_json(s, TRUE)
+FROM (
+	SELECT d.dealership_id, d.state,
+		ARRAY_AGG(s.last_name || ', ' || s.first_name) AS list_of_salespeople,
+		COUNT(s.salesperson_id) AS Num_of_salespeople
+	FROM salespeople s
+	LEFT JOIN dealerships d
+		ON d.dealership_id = s.dealership_id
+	GROUP BY d.dealership_id, d.state
+	ORDER BY d.state ASC)
+AS s
 ```
 
 ### Screenshot
 
-![Q10 Screenshot](screenshots/q10_salespeople_array_to_json.png)
+![Q10 Screenshot](screenshots/exercise%205%20Q10.png)
